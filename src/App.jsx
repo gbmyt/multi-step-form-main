@@ -1,7 +1,9 @@
+import Form from "./components/Form"
+
 function App() {
     return (
         <>
-            <p className="read-the-docs">Form goes here</p>
+            <Form />
         </>
     )
 }
