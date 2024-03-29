@@ -1,0 +1,18 @@
+.btnCarousel {
+    border-radius: 50%;
+
+    &.selected {
+        background-color: $tertiaryButtonBg;
+    }
+}
+
+.footer {
+    &.buttons {
+        background-color: $primaryButtonBg;
+        border-radius: 0.45rem;
+
+        &.submit {
+            background-color: $secondaryButtonBg;
+        }
+    }
+}
