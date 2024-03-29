@@ -1,23 +1,48 @@
-import { formStepsData } from "../data/data"
+import { useState } from "react"
 import bgMobile from "../assets/images/bg-sidebar-mobile.svg"
+import { formStepsData } from "../data/data"
 
 const Form = () => {
-    const steps = ["1", "2", "3", "4"]
+    const [currentStep, setStep] = useState(0)
     // const formSteps = ["Your Info", "Select Plan", "Add-Ons", "Summary"]
+
+    function handleUpdateFormStep(e) {
+        e.preventDefault()
+
+        if (e.target.id === "next-btn") {
+            currentStep + 1 >= formStepsData.length
+                ? console.log("Out of bounds.")
+                : setStep((prev) => (prev += 1))
+        } else if (e.target.id === "back-btn") {
+            currentStep - 1 < 0
+                ? console.log("Out of bounds.")
+                : setStep((prev) => (prev -= 1))
+        }
+    }
 
     function handleFormSubmit(e) {
         e.preventDefault()
-        console.log(e.target, " clicked")
+        console.log("Submitting...")
     }
 
     return (
         <form id="form">
-            {steps && steps.map((step, i) => <button key={i}>{step}</button>)}
+            {formStepsData &&
+                formStepsData.map((step, i) => (
+                    <button
+                        className={`btnCarousel ${
+                            currentStep == i ? "selected" : null
+                        }`}
+                        key={i}
+                    >
+                        {i + 1}
+                    </button>
+                ))}
 
             <header>
                 <img src={bgMobile} alt="background-image" />
-                <h1>{formStepsData["1"].title}</h1>
-                <p>{formStepsData["1"].subTitle}</p>
+                <h1>{formStepsData[currentStep].title}</h1>
+                <p>{formStepsData[currentStep].subTitle}</p>
             </header>
 
             {/* Only show this if in desktop view */}
@@ -50,14 +75,41 @@ const Form = () => {
             </section>
 
             {/* Don't Show on First Page  */}
-            {/* <button type="submit" onClick={handleFormSubmit}>
-                Go Back
-            </button> */}
+            {currentStep > 0 ? (
+                <button
+                    id="back-btn"
+                    className="footer buttons"
+                    type="submit"
+                    onClick={handleUpdateFormStep}
+                >
+                    Go Back
+                </button>
+            ) : (
+                <></>
+            )}
 
             {/* Change to 'Confirm' on last page  */}
-            <button type="submit" onClick={handleFormSubmit}>
-                Next Step
-            </button>
+
+            {currentStep === formStepsData.length - 1 ? (
+                <button
+                    id="submit"
+                    className="footer buttons submit"
+                    type="submit"
+                    onClick={handleFormSubmit}
+                >
+                    Confirm
+                </button>
+            ) : currentStep < formStepsData.length ? (
+                <button
+                    className="footer buttons"
+                    id="next-btn"
+                    onClick={handleUpdateFormStep}
+                >
+                    Next Step
+                </button>
+            ) : (
+                <></>
+            )}
         </form>
     )
 }
