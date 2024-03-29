@@ -1,5 +1,5 @@
-export const formStepsData = {
-    1: {
+export const formStepsData = [
+    {
         title: "Personal info",
         subTitle: "Please provide your name, email address, and phone number.",
         metadata: {
@@ -20,7 +20,7 @@ export const formStepsData = {
             ],
         },
     },
-    2: {
+    {
         title: "Select Your Plan",
         subTitle: "You have the option of monthly or yearly billing",
         metadata: {
@@ -32,7 +32,7 @@ export const formStepsData = {
             ],
         },
     },
-    3: {
+    {
         title: "Pick add-ons",
         subTitle: "Add-ons help enhance your gaming experience.",
         metadata: {
@@ -56,7 +56,7 @@ export const formStepsData = {
             ],
         },
     },
-    4: {
+    {
         title: "Finishing Up",
         subTitle: "Double-check everything looks OK before confirming.",
         metadata: {
@@ -64,4 +64,4 @@ export const formStepsData = {
             options: [],
         },
     },
-}
+]
